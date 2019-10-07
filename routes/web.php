@@ -20,7 +20,7 @@ Route::get('blogAdd' ,'BlogController@blogAddForm');
 Route::post('blogAdd' ,'BlogController@blogAdd');
 
 // 記事編集フォーム
-Route::get('blogEdit/{id}' ,'BlogController@blogEdit');
+Route::get('blogEdit/{id}' ,'BlogController@blogEditForm');
 // 記事編集ポスト
 Route::post('blogEdit' ,'BlogController@blogEdit');
 
@@ -38,7 +38,7 @@ Route::get('categoryAddForm' ,'BlogController@categoryAddForm');
 Route::post('categoryAdd' ,'BlogController@categoryAdd');
 
 // カテゴリー編集フォーム
-Route::get('categoryEdit/{id}' ,'BlogController@categoryEdit');
+Route::get('categoryEdit/{id}' ,'BlogController@categoryEditForm');
 // カテゴリー編集ポスト
 Route::post('categoryEdit' ,'BlogController@categoryEdit');
 
