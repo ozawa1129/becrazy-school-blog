@@ -81,12 +81,12 @@ Route::get('passChangeForm' ,'BlogController@passChangeForm');
 // ログインユーザーのパスワード変更ポスト
 Route::post('passChange' ,'BlogController@passChange');
 
-//ログインフォーム
+// ログインフォーム
 Route::get('loginForm' ,'BlogController@loginForm');
 // ログインポスト
 Route::post('login' ,'BlogController@login');
 
-//ログアウトフォーム
+// ログアウトフォーム
 Route::get('logoutForm' ,'BlogController@logoutForm');
 // ログアウトポスト
 Route::post('logout' ,'BlogController@loguout');
