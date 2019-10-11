@@ -117,7 +117,7 @@ class BlogController extends Controller {
     
     // トップページ表示
     public function blogTop(){
-        
+        return view('blogTop');
     }
     
     // 記事ページ
