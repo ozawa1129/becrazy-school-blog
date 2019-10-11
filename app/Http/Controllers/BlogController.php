@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Blog;
+use App\Models\Post;
 
 class BlogController extends Controller {
     
@@ -29,9 +29,14 @@ class BlogController extends Controller {
     // 記事追加ポスト
     public function blogAdd(Request $request){
         $posts = new Post();
+        $posts->user_id = $request->user_id;
         $posts->title = $request->title;
         $posts->content = $request->content;
-        return redirect('blogAddForm');
+        $posts->slug = $request->slug;
+        $posts->status = $request->status;
+        $posts->mime_type = $request->mime_type;
+        $posts->save();
+        return redirect('blogAdd');
     }
     
     // 記事編集フォーム
