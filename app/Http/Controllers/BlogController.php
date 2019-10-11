@@ -72,7 +72,7 @@ class BlogController extends Controller {
     // カテゴリー一覧
     public function categoryList(){
         $taxonomies = Taxonomy::all();
-        $data array('taxonomies' => $taxonomies);
+        $data = array('taxonomies' => $taxonomies);
         return view('categoryList', $data);
     }
     
