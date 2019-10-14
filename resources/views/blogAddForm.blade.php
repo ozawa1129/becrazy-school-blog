@@ -51,12 +51,10 @@
         </form>
     </div>
     <footer>
-        <!--
         <form id="logout-form" action="{{ route('logout') }}" method="POST">
         @csrf
-        <input type="submit" value="ログアウト">
+            <input type="submit" value="ログアウト">
         </form>
-        -->
     </footer>
 </body>
 </html>
