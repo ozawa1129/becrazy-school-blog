@@ -14,7 +14,29 @@
     <header>
         <h1>ブログの記事一覧</h1>
     </header>
-    <article id="sample">ここにいろんな文を書いたり画像を置いたり…</article>
+    <div class="lists">
+        <form method="POST" action="blogEdit">
+            @csrf
+            <table border="1"  cellspacing="0" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>選択</th><th>id</th><th>タイトル</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($blogList as $list)
+                        <tr>
+                            <td><input type="checkbox" name="ids[]" value="{{ $list->id }}"></td>
+                            <td>{{ $list->id }}</td>
+                            <td><a href="blogEdit/{{$list->id}}">{{ $list->title }}</a></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <br>
+            <input type="submit" value="論理削除する">
+        </form>
+    </div>
     <footer>
     </footer>
 </body>

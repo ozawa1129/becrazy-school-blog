@@ -53,7 +53,7 @@ class BlogController extends Controller {
     // 記事編集フォーム
     public function blogEditForm($id){
         $posts = Post::find($id);
-        $data = array('articleEdit' => $posts);
+        $data = array('blogEdit' => $posts);
         return view('blogEditForm', $data);
     }
     
