@@ -52,22 +52,31 @@ class BlogController extends Controller {
     
     // 記事編集フォーム
     public function blogEditForm($id){
+        $user_id = Auth::id();
         $posts = Post::find($id);
-        $data = array('blogEdit' => $posts);
+        $text = "text/html";
+        $image = "image/png";
+        $data = array('blogEdit' => $posts ,'user_id' => $user_id);
         return view('blogEditForm', $data);
     }
     
+    const MIME_TYPE_TEXT = "text/html";
+    
     // 記事編集ポスト
     public function blogEdit(Request $request){
-        // バリデーション
+        // バリデーション後ほど細かく記載
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string'
         ]);
         
         $posts = Post::find($request->id);
+        $posts->user_id = $request->user_id;
         $posts->title = $request->title;
         $posts->content = $request->content;
+        $posts->slug = $request->slug;
+        $posts->status = $request->status;
+        $posts->mime_type = self::MIME_TYPE_TEXT;
         $posts->save();
         return redirect('blogList');
     }

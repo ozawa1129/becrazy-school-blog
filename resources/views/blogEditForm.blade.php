@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="検索キーワード">
     <meta name="description" content="説明文">
-    <title>記事追加</title>
+    <title>記事編集</title>
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="js/library.js"></script>
@@ -12,30 +12,33 @@
 </head>
 <body>
     <header>
-        <h1>記事を追加する</h1>
+        <h1>記事を編集する</h1>
     </header>
-    <div class="add">
-        <form method="POST" action="blogAdd">
+    <div class="flex-center position-ref">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <form method="POST" action="../blogEdit" enctype="text/html">
             @csrf
+            <input type="hidden" name="id" required value="{{ $blogEdit->id }}">
             <input type="hidden" name="user_id" value="{{$user_id}}">
             <dl>
-                <dt>タイプ</dt>
-                <dd>
-                    <input type="radio" name="mine_type" required value="text/html">記事
-                    <input type="radio" name="mine_type" required value="image/png">メディア
-                </dd>
-            </dl>
-            <dl>
                 <dt>タイトル</dt>
-                <dd><input type="text" name="title" required value="{{ old('title') }}"></dd>
+                <dd><input type="text" name="title" required value="{{ $blogEdit->title }}"></dd>
             </dl>
             <dl>
                 <dt>本文</dt>
-                <dd><textarea name="content" required>{{ old('content')}}</textarea></dd>
+                <dd><textarea name="content" required>{{ $blogEdit->content }}</textarea></dd>
             </dl>
             <dl>
                 <dt>スラッグ</dt>
-                <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
+                <dd><input type="text" name="slug" required value="{{ $blogEdit->slug }}"></dd>
             </dl>
             <dl>
                 <dt>ステータス</dt>
@@ -45,14 +48,13 @@
                     <input type="radio" name="status" required value="inherit">メディアアップロード
                 </dd>
             </dl>
-            <input type="submit" value="ブログ投稿">
+            <input type="submit" value="更新">
         </form>
+        <div class="back">
+            <a href="../blogList"><input type="submit" value="ブログ一覧に戻る"></a>
+        </div>
     </div>
     <footer>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        @csrf
-            <input type="submit" value="ログアウト">
-        </form>
     </footer>
 </body>
 </html>
