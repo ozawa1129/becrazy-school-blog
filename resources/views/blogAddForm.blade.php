@@ -36,7 +36,7 @@
                 <dd><textarea name="content" required>{{ old('content')}}</textarea></dd>
             </dl>
             <dl>
-                <dt>slug</dt>
+                <dt>スラッグ</dt>
                 <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
             </dl>
             <dl>
