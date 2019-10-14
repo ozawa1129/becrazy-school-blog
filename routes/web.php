@@ -5,6 +5,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 /*
 -----------------------------
 ブログの管理機能で使うルーティング
@@ -96,3 +100,4 @@ Route::post('logout' ,'BlogController@loguout');
 以下追加機能のルーティング
 ----------------------
 */
+

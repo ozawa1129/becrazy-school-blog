@@ -23,7 +23,8 @@ class BlogController extends Controller {
     
     // 記事追加フォーム
     public function blogAddForm(){
-        return view('blogAddForm');
+        $user_id = Auth::id();
+        return view('blogAddForm', ['user_id' => $user_id]);
     }
     
     // 記事追加ポスト
