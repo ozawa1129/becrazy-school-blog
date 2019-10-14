@@ -5,9 +5,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* 独自の認証機能を追加するためにコメントアウト
 Auth::routes();
+*/
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// ログイン・ログアウト
+Route::get('login', 'Auth\BlogLoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\BlogLoginController@login');
+Route::post('logout', 'Auth\BlogLoginController@logout')->name('logout');
+
+// 新規登録
+Route::get('register', 'Auth\BlogRegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\BlogRegisterController@register');
 
 /*
 -----------------------------
@@ -67,6 +78,7 @@ Route::get('categoryChoice' ,'BlogController@categoryChoice');
 ------------------------
 */
 
+/*
 // 初期ユーザー登録フォーム
 Route::get('userAddForm' ,'BlogController@userAddForm');
 // 初期ユーザー登録ポスト
@@ -93,7 +105,8 @@ Route::post('login' ,'BlogController@login');
 // ログアウトフォーム
 Route::get('logoutForm' ,'BlogController@logoutForm');
 // ログアウトポスト
-Route::post('logout' ,'BlogController@loguout');
+Route::post('logout' ,'BlogController@logout');
+*/
 
 /*
 ----------------------

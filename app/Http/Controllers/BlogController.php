@@ -5,8 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Auth;
 
 class BlogController extends Controller {
+    
+    /**
+     * コンストラクタ
+     * 他のメソッドを実行する前に認証済みかどうかチェックする
+     */
+    public function __construct() {
+        // 認証ミドルウエアを利用する設定
+        $this->middleware('auth');
+    }
     
     /*
     -------------------------
