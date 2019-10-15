@@ -81,13 +81,6 @@ class BlogController extends Controller {
         return redirect('blogList');
     }
     
-    // 記事論理削除フォーム。もしかしたら不要かも。
-    public function blogHideForm($id){
-        $posts = Post::find($id);
-        $data = array('blogHideForm' => $posts);
-        return view('blogHideForm', $data);
-    }
-    
     // 記事論理削除ポスト
     public function blogHide(Request $request){
             $validatedData = $request->validate([
