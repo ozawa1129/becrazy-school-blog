@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Taxonomy;
 use Auth;
 
 class BlogController extends Controller {
@@ -17,6 +18,9 @@ class BlogController extends Controller {
         // 認証ミドルウエアを利用する設定
         $this->middleware('auth');
     }
+    
+    // mine_typeの定数化
+    const MIME_TYPE_TEXT = "text/html";
     
     /*
     -------------------------
@@ -45,7 +49,7 @@ class BlogController extends Controller {
         $posts->content = $request->content;
         $posts->slug = $request->slug;
         $posts->status = $request->status;
-        $posts->mime_type = $request->mime_type;
+        $posts->mime_type = self::MIME_TYPE_TEXT;
         $posts->save();
         return redirect('blogAdd');
     }
@@ -54,13 +58,9 @@ class BlogController extends Controller {
     public function blogEditForm($id){
         $user_id = Auth::id();
         $posts = Post::find($id);
-        $text = "text/html";
-        $image = "image/png";
         $data = array('blogEdit' => $posts ,'user_id' => $user_id);
         return view('blogEditForm', $data);
     }
-    
-    const MIME_TYPE_TEXT = "text/html";
     
     // 記事編集ポスト
     public function blogEdit(Request $request){
@@ -81,7 +81,7 @@ class BlogController extends Controller {
         return redirect('blogList');
     }
     
-    // 記事論理削除フォーム
+    // 記事論理削除フォーム。もしかしたら不要かも。
     public function blogHideForm($id){
         $posts = Post::find($id);
         $data = array('blogHideForm' => $posts);
@@ -90,47 +90,56 @@ class BlogController extends Controller {
     
     // 記事論理削除ポスト
     public function blogHide(Request $request){
-        $posts = Post::find($request->id);
-        $posts->delete();
+            $validatedData = $request->validate([
+            'ids' => 'array|required'
+        ]);
+        
+        // 完了メソッド
+        $softDeleted = Post::whereIn('id', $request->ids)->get();
+        foreach($softDeleted as $delete){
+            $delete->deleted_at = now();
+            $delete->save();
+        }
+        return redirect('blogList');
     }
     
     // カテゴリー一覧
     public function categoryList(){
-        $taxonomies = Taxonomy::all();
-        $data = array('taxonomies' => $taxonomies);
+        $taxonomy = Taxonomy::all();
+        $data = array('taxonomy' => $taxonomy);
         return view('categoryList', $data);
     }
     
     // カテゴリー追加フォーム
-    public function categoryAddForm($id){
-        $taxonomies = Taxonomy::find($id);
-        $data = array('categoryAddForm' => $taxonomies);
-        return view('blogHideForm', $data);
+    public function categoryAddForm(){
+        return view('categoryAddForm');
     }
     
     // カテゴリー追加ポスト
     public function categoryAdd(Request $request){
         // 後々バリデーション
-        $taxonomies = new Taxonomy();
-        $taxonomies->type = $request->type;
-        $taxonomies->name = $request->name;
-        $taxonomies->save();
-        return redirect('categoryList');
+        $taxonomy = new Taxonomy();
+        $taxonomy->type = $request->type;
+        $taxonomy->name = $request->name;
+        $taxonomy->slug = $request->slug;
+        $taxonomy->description = $request->description;
+        $taxonomy->save();
+        return redirect('categoryAddForm');
     }
     
     // カテゴリー編集フォーム
     public function categoryEditForm($id){
-        $taxonomies = Taxonomy::find($id);
-        $data = array('categoryEditForm' => $taxonomies);
+        $taxonomy = Taxonomy::find($id);
+        $data = array('categoryEditForm' => $taxonomy);
         return view('categoryEditForm', $data);
     }
     
     // カテゴリー編集ポスト
     public function categoryEdit(Request $request){
-        $taxonomies = Taxonomy::find($request->id);
-        $taxonomies->type = $request->type;
-        $taxonomies->name = $request->name;
-        $todoLists->save();
+        $taxonomy = Taxonomy::find($request->id);
+        $taxonomy->type = $request->type;
+        $taxonomy->name = $request->name;
+        $taxonomy->save();
         return redirect('categoryList');
     }
     

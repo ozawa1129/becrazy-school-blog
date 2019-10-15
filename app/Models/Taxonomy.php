@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Taxonomy extends Model
 {
+    protected $table = "taxonomy";
     //論理削除機能を追加
     use SoftDeletes;
     // カラム名の設定上書き
-    const DELETED_AT = 'deleted_datetime';
+    //const DELETED_AT = 'deleted_datetime';
 }
