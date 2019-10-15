@@ -130,15 +130,15 @@ class BlogController extends Controller {
     // カテゴリー編集フォーム
     public function categoryEditForm($id){
         $taxonomy = Taxonomy::find($id);
-        $data = array('categoryEditForm' => $taxonomy);
+        $data = array('categoryEdit' => $taxonomy);
         return view('categoryEditForm', $data);
     }
     
     // カテゴリー編集ポスト
     public function categoryEdit(Request $request){
         $taxonomy = Taxonomy::find($request->id);
-        $taxonomy->type = $request->type;
         $taxonomy->name = $request->name;
+        $taxonomy->type = $request->type;
         $taxonomy->save();
         return redirect('categoryList');
     }
