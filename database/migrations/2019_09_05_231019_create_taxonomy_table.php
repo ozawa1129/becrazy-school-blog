@@ -44,6 +44,8 @@ class CreateTaxonomyTable extends Migration
 
             // created_at・updated_at
             $table->timestamps();
+            // deleted_at(論理削除カラム)
+            $table->softDeletes();
         });
     }
 
