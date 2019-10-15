@@ -15,7 +15,7 @@
         <h1>ブログの記事一覧</h1>
     </header>
     <div class="lists">
-        <form method="POST" action="blogEdit">
+        <form method="POST" action="blogHide">
             @csrf
             <table border="1"  cellspacing="0" cellpadding="5">
                 <thead>
