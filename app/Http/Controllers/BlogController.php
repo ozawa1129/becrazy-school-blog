@@ -149,7 +149,7 @@ class BlogController extends Controller {
     
     // 記事ページ
     public function blogArticle(){
-        
+        return view('blogArticle');
     }
     
     // カテゴリー選択時の記事一覧
