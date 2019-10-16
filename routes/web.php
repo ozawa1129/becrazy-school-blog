@@ -64,13 +64,13 @@ Route::post('categoryEdit' ,'BlogController@categoryEdit');
 */
 
 // トップページ表示
-Route::get('blogTop' ,'BlogController@blogTop');
+Route::get('blogTop' ,'ViewController@blogTop');
 
 // 記事ページ
-Route::get('blogArticle' ,'BlogController@blogArticle');
+Route::get('blogArticle/{slug}' ,'ViewController@blogArticle');
 
 // カテゴリー選択時の記事一覧
-Route::get('categoryChoice' ,'BlogController@categoryChoice');
+Route::get('categoryChoice' ,'ViewController@categoryChoice');
 
 /*
 ------------------------
