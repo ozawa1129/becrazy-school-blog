@@ -55,9 +55,32 @@ class BlogController extends Controller {
         $posts->status = $request->status;
         $posts->mime_type = self::MIME_TYPE_TEXT;
         $posts->save();
-        $posts->taxonomies()->attach($request->tags);
-        $posts->taxonomies()->attach($request->categories);
+        
+        foreach ($request->tags as $tag){
+            $taxonomyRelationships = TaxonomyRelationship::select('taxonomy_order')
+                ->where('taxonomy_id', $tag)
+                ->orderBy('taxonomy_order', 'desc')
+                ->first();
+            if(is_null($taxonomyRelationships)){
+                $posts->taxonomies()->attach($tag);
+            }else{
+                $next_order = $taxonomyRelationships->taxonomy_order + 1;
+                $posts->taxonomies()->attach($tag, ['taxonomy_order' => $next_order]);
+            }
 
+        }
+        foreach ($request->categories as $category){
+            $taxonomyRelationships = TaxonomyRelationship::select('taxonomy_order')
+                ->where('taxonomy_id', $category)
+                ->orderBy('taxonomy_order', 'desc')
+                ->first();
+            if (is_null($taxonomyRelationships)){
+                $posts->taxonomies()->attach($category);
+            }else{
+                $next_order = $taxonomyRelationships->taxonomy_order + 1;
+                $posts->taxonomies()->attach($category, ['taxonomy_order' => $next_order]);
+            }
+        }
         return redirect('blogAdd');
     }
     

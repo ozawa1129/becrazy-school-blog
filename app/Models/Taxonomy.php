@@ -14,6 +14,7 @@ class Taxonomy extends Model
     //const DELETED_AT = 'deleted_datetime';
     
     public function posts(){
-        return $this->belongsToMany('App\Models\Post', 'taxonomy_relationships', 'taxonomy_id', 'post_id');
+        return $this->belongsToMany('App\Models\Post', 'taxonomy_relationships', 'taxonomy_id', 'post_id')
+            ->withPivot('taxonomy_order');
     }
 }
