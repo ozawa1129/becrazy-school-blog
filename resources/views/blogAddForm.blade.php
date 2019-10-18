@@ -49,7 +49,7 @@
                 <dt>タグ</dt>
                 <dd>
                     @foreach ($tags as $tag)
-                        <input type="radio" name="tags[]" required value="{{$tag->id}}">{{$tag->name}}
+                        <input type="checkbox" name="tags[]" value="{{$tag->id}}">{{$tag->name}}
                     @endforeach
                 </dd>
             </dl>
@@ -57,7 +57,7 @@
                 <dt>カテゴリー</dt>
                 <dd>
                     @foreach ($categories as $category)
-                        <input type="radio" name="categories[]" required value="{{$category->id}}">{{$category->name}}
+                        <input type="checkbox" name="categories[]" value="{{$category->id}}">{{$category->name}}
                     @endforeach
                 </dd>
             </dl>
