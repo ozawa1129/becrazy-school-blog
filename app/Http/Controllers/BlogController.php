@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Taxonomy;
+use App\Models\TaxonomyRelationship;
 use Auth;
 
 class BlogController extends Controller {
@@ -31,14 +32,17 @@ class BlogController extends Controller {
     // 記事一覧表示
     public function blogList(){
         $posts = Post::all();
-        $data = array('blogList' => $posts);
+        $data = array('blogList' => $posts, 'tags' => $tags);
         return view('blogList', $data);
     }
     
     // 記事追加フォーム
     public function blogAddForm(){
         $user_id = Auth::id();
-        return view('blogAddForm', ['user_id' => $user_id]);
+        $tags = Taxonomy::whereIn('type', ["tag"])->get();
+        $categories = Taxonomy::whereIn('type', ["category"])->get();
+        $data = array('user_id' => $user_id, 'tags' => $tags, 'categories' => $categories);
+        return view('blogAddForm', $data);
     }
     
     // 記事追加ポスト
@@ -51,6 +55,9 @@ class BlogController extends Controller {
         $posts->status = $request->status;
         $posts->mime_type = self::MIME_TYPE_TEXT;
         $posts->save();
+        $posts->taxonomies()->attach($request->tags);
+        $posts->taxonomies()->attach($request->categories);
+
         return redirect('blogAdd');
     }
     

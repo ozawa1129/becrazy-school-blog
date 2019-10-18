@@ -45,12 +45,28 @@
                     <input type="radio" name="status" required value="inherit">メディアアップロード
                 </dd>
             </dl>
+            <dl>
+                <dt>タグ</dt>
+                <dd>
+                    @foreach ($tags as $tag)
+                        <input type="radio" name="tags[]" required value="{{$tag->id}}">{{$tag->name}}
+                    @endforeach
+                </dd>
+            </dl>
+            <dl>
+                <dt>カテゴリー</dt>
+                <dd>
+                    @foreach ($categories as $category)
+                        <input type="radio" name="categories[]" required value="{{$category->id}}">{{$category->name}}
+                    @endforeach
+                </dd>
+            </dl>
             <input type="submit" value="ブログ投稿">
         </form>
     </div>
     <footer>
         <form id="logout-form" action="{{ route('logout') }}" method="POST">
-        @csrf
+            @csrf
             <input type="submit" value="ログアウト">
         </form>
     </footer>

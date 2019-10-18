@@ -12,4 +12,8 @@ class Taxonomy extends Model
     use SoftDeletes;
     // カラム名の設定上書き
     //const DELETED_AT = 'deleted_datetime';
+    
+    public function posts(){
+        return $this->belongsToMany('App\Models\Post', 'taxonomy_relationships', 'taxonomy_id', 'post_id');
+    }
 }
