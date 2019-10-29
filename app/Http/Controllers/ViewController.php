@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Taxonomy;
+use App\Models\TaxonomyRelationship;
 
 class ViewController extends Controller {
     /*
@@ -30,6 +31,15 @@ class ViewController extends Controller {
     
     // カテゴリー選択時の記事一覧
     public function categoryChoice(){
-        
+        $categories = Taxonomy::whereIn('type', ["category"])->get();
+        $data = array('categories' => $categories);
+        return view('categoryChoice', $data);
+    }
+    
+    // カテゴリー選択時に飛ばす
+    public function categoryGroup($id){
+        $taxonomies = Taxonomy::find($id);
+        $data = array('posts' => $taxonomies->posts);
+        return view('categoryGroup', $data);
     }
 }
