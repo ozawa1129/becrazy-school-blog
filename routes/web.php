@@ -17,7 +17,8 @@ Route::post('login', 'Auth\BlogLoginController@login');
 Route::post('logout', 'Auth\BlogLoginController@logout')->name('logout');
 
 // 新規登録
-Route::get('register', 'Auth\BlogRegisterController@showRegistrationForm')->name('register');
+//Route::get('register', 'Auth\BlogRegisterController@showRegistrationForm')->name('register');
+Route::get('register', 'Auth\BlogRegisterController@checkRegister')->name('register');
 Route::post('register', 'Auth\BlogRegisterController@register');
 
 /*
@@ -71,6 +72,9 @@ Route::get('blogArticle/{slug}' ,'ViewController@blogArticle');
 
 // カテゴリー選択時の記事一覧
 Route::get('categoryChoice' ,'ViewController@categoryChoice');
+
+// カテゴリー選択時に飛ばすポスト
+Route::get('categoryGroup/{id}' ,'ViewController@categoryGroup');
 
 /*
 ------------------------
