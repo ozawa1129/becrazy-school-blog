@@ -32,7 +32,7 @@ class BlogController extends Controller {
     // 記事一覧表示
     public function blogList(){
         $posts = Post::all();
-        $data = array('blogList' => $posts, 'tags' => $tags);
+        $data = array('blogList' => $posts);
         return view('blogList', $data);
     }
     
@@ -164,27 +164,6 @@ class BlogController extends Controller {
         $taxonomy->type = $request->type;
         $taxonomy->save();
         return redirect('categoryList');
-    }
-    
-    /*
-    -----------------------
-    ブログ閲覧機能で使うメソッド
-    -----------------------
-    */
-    
-    // トップページ表示
-    public function blogTop(){
-        return view('blogTop');
-    }
-    
-    // 記事ページ
-    public function blogArticle(){
-        return view('blogArticle');
-    }
-    
-    // カテゴリー選択時の記事一覧
-    public function categoryChoice(){
-        
     }
     
     /*
