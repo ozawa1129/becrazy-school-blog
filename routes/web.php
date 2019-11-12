@@ -5,21 +5,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/* 独自の認証機能を追加するためにコメントアウト
-Auth::routes();
-*/
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-// ログイン・ログアウト
-Route::get('login', 'Auth\BlogLoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\BlogLoginController@login');
-Route::post('logout', 'Auth\BlogLoginController@logout')->name('logout');
-
-// 新規登録
-//Route::get('register', 'Auth\BlogRegisterController@showRegistrationForm')->name('register');
-Route::get('register', 'Auth\BlogRegisterController@checkRegister')->name('register');
-Route::post('register', 'Auth\BlogRegisterController@register');
 
 /*
 -----------------------------
@@ -80,37 +65,35 @@ Route::get('categoryGroup/{id}' ,'ViewController@categoryGroup');
 ------------------------
 認証機能用で使うルーティング
 ------------------------
+
+/* 独自の認証機能を追加するためにコメントアウト
+Auth::routes();
 */
 
-/*
-// 初期ユーザー登録フォーム
-Route::get('userAddForm' ,'BlogController@userAddForm');
-// 初期ユーザー登録ポスト
-Route::post('userAdd' ,'BlogController@userAdd');
+Route::get('/home', 'CMSHomeController@home');
+
+// ログイン・ログアウト
+Route::get('login', 'Auth\BlogLoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\BlogLoginController@login');
+Route::post('logout', 'Auth\BlogLoginController@logout')->name('logout');
+
+// 初期ユーザーが存在するかチェック
+Route::get('usersCheck', 'Auth\BlogRegisterController@checkRegister');
+
+// 新規登録
+Route::get('firstUserRegister', 'Auth\BlogRegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\BlogRegisterController@register');
+
+// 管理ユーザー登録
+Route::get('addUser', 'CMSHomeController@showRegistrationForm')->name('register');
 
 // 管理ユーザー一覧
-Route::get('managerList' ,'BlogController@managerList');
+Route::get('usersList', 'CMSHomeController@usersList');
 
-// 管理ユーザー登録フォーム
-Route::get('managerAddForm' ,'BlogController@managerAddForm');
-// 管理ユーザー登録ポスト
-Route::post('managerAdd' ,'BlogController@managerAdd');
-
-// ログインユーザーのパスワード変更フォーム
-Route::get('passChangeForm' ,'BlogController@passChangeForm');
-// ログインユーザーのパスワード変更ポスト
-Route::post('passChange' ,'BlogController@passChange');
-
-// ログインフォーム
-Route::get('loginForm' ,'BlogController@loginForm');
-// ログインポスト
-Route::post('login' ,'BlogController@login');
-
-// ログアウトフォーム
-Route::get('logoutForm' ,'BlogController@logoutForm');
-// ログアウトポスト
-Route::post('logout' ,'BlogController@logout');
-*/
+// パスワードを変更する
+Route::get('changePasswordForm', 'CMSHomeController@changePasswordForm');
+// パスワード変更をポスト
+Route::post('changePass', 'CMSHomeController@changePass');
 
 /*
 ----------------------
