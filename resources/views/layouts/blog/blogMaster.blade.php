@@ -12,14 +12,15 @@
 </head>
 <body>
     <header>
-        @yield('header')
+        <a href="/blogTop">トップ</a>
+        <a href="/categoryChoice">カテゴリー一覧</a>
+        @yield('h1')
     </header>
     <div class="content">
         @yield('content')
     </div>
     <footer>
-        @section('footer')
-        @show
+        <div>ここはfooter</div>
     </footer>
 </body>
 </html>

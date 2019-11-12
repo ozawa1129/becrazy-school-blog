@@ -12,6 +12,11 @@
     <header>
         <div class="header">
             <h1>@yield('h1')</h1>
+            <a href="blogList">記事一覧</a>
+            <a href="blogAdd">記事追加</a>
+            <a href="categoryList">カテゴリー一覧</a>
+            <a href="categoryAddForm">カテゴリー追加</a>
+            <a href="blogTop">トップページ</a>
         </div>
         <div class="logout">
             <form id="logout-form" action="{{ route('logout') }}" method="POST">

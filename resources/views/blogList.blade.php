@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="検索キーワード">
-    <meta name="description" content="説明文">
-    <title>記事一覧</title>
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="js/library.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
-</head>
-<body>
-    <header>
-        <h1>ブログの記事一覧</h1>
-    </header>
+@extends('layouts.manager.managerMaster')
+
+@section('title', '記事一覧')
+
+@section('h1', '記事一覧')
+
+@section('manager')
     <div class="lists">
         <form method="POST" action="blogHide">
             @csrf
@@ -37,7 +28,4 @@
             <input type="submit" value="論理削除する">
         </form>
     </div>
-    <footer>
-    </footer>
-</body>
-</html>
+@endsection

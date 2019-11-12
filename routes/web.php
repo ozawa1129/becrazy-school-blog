@@ -25,7 +25,7 @@ Route::get('blogEdit/{id}' ,'BlogController@blogEditForm');
 // 記事編集ポスト
 Route::post('blogEdit' ,'BlogController@blogEdit');
 
-// 記事論理削除フォーム
+// 記事論理削除フォーム->使ってないのでいらないかも
 Route::get('blogHideForm' ,'BlogController@blogHideForm');
 // 記事論理削除ポスト
 Route::post('blogHide' ,'BlogController@blogHide');
