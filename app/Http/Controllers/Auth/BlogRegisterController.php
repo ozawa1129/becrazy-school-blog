@@ -11,14 +11,15 @@ class BlogRegisterController extends RegisterController
      * @var string
      */
     // ログイン後に遷移するurl指定
-    protected $redirectTo = '/';
+    protected $redirectTo = 'home';
     
     public function checkRegister(){
         $users = User::all()->count();
         if($users === 0){
-            return redirect('register');
+            return redirect('firstUserRegister');
         }else{
-            return redirect('blogTop');
+            return redirect('home');
         }
     }
+    
 }
