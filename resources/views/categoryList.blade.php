@@ -1,8 +1,8 @@
 @extends('layouts.manager.managerMaster')
 
-@section('title', '投稿画面')
+@section('title', 'カテゴリ一覧')
 
-@section('h1', '投稿画面')
+@section('h1', 'カテゴリ一覧')
 
 @section('manager')
     <div class="lists">

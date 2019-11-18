@@ -1,0 +1,97 @@
+/* 全体に当てる*/
+body{
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}
+
+a:link{
+    color: black;
+}
+a:visited{
+    color: black;
+}
+
+.nav>li {
+    position: relative;
+    display: block;
+}
+.navbar-nav>li {
+    float: left;
+}
+
+.main{
+    flex: 1;
+}
+
+/* ヘッダー */
+header{
+    margin-bottom:140px;
+}
+
+header p{
+    margin-top: 35px;
+}
+header h1{
+    margin-top: 25px;
+}
+
+/* ロゴ */
+.logo{
+}
+
+/* ナビゲーション */
+
+/* サイドバー */
+.prof_img{
+    padding-top: 40px;
+}
+.prof_name{
+    padding-top: 30px;
+}
+
+.self_intro{
+    padding-top: 15px;
+    padding-bottom: 40px;
+}
+
+/* コンテンツ */
+.content{
+    padding-right: 50px;
+}
+.title{
+ padding-top: 100px;
+}
+
+.img{
+    margin-top: 50px;
+}
+
+.words{
+    margin-top: 50px;
+}
+
+.pd_words{
+    padding-bottom: 100px;
+}
+
+.read_me{
+    margin-top: 30px;
+    margin-bottom: 140px;
+}
+
+.article{
+    margin-bottom: 30px;
+}
+
+/* フッター */
+
+footer{
+    margin-top: 150px;
+
+}
+
+.footer{
+    height: 70px;
+    padding-top: 25px;
+}
