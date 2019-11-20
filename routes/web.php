@@ -1,10 +1,12 @@
 <?php
 
-// デフォルトであるやつ。一応まだ取っておく。
-Route::get('/', function () {
-    return view('welcome');
-});
 
+// トップページ表示
+Route::get('/' ,'ViewController@blogTop');
+
+//Route::get('/', function () {
+//    return view('blogTop', 'ViewController@blogTop');
+//});
 
 /*
 -----------------------------
@@ -48,9 +50,6 @@ Route::post('categoryEdit' ,'BlogController@categoryEdit');
 ブログ閲覧機能で使うルーティング
 ---------------------------
 */
-
-// トップページ表示
-Route::get('blogTop' ,'ViewController@blogTop');
 
 // 記事ページ
 Route::get('blogArticle/{slug}' ,'ViewController@blogArticle');
