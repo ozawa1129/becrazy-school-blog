@@ -18,7 +18,7 @@
                 <article>{{$article->content}}</article>
             </div>
         </div>
-        <div class="row">
+        <div class="row bg-light category_area">
             <div class="category_type col-md-12">
                     <ul>
                         <li>▶︎関連カテゴリー:</li>
@@ -28,7 +28,7 @@
                     </ul>
             </div>
         </div>
-        <div class="row bg-light">
+        <div class="row bg-light tag_area">
             <div class="tag_type col-md-12">
                     <ul>
                         <li>▶︎関連タグ:</li>
@@ -38,7 +38,7 @@
                     </ul>
             </div>
         </div>
-        <div class="row bg-light">
+        <div class="row bg-light prev_next">
             <div class="col-md-6">
                 @if(isset($prev))
                     <div>
