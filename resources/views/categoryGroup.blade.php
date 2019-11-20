@@ -5,11 +5,17 @@
 @section('h1', 'グループ')
 
 @section('content')
-    <div class="記事一覧">
-        @foreach ($posts as $post)
-            <ul>
-                <li>{{$post->title}}</li>
-            </ul>
-        @endforeach
+    <div class="col-md-9 content">
+        <div class="row bg-light justify-content-center article">
+            <div class="col-md-12">
+                @foreach ($posts as $post)
+                    <ul>
+                        <li>
+                            <a href="/blogArticle/{{$post->slug}}">{{$post->title}}</a>
+                        </li>
+                    </ul>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection
