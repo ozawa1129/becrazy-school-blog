@@ -25,7 +25,25 @@ class ViewController extends Controller {
     // 記事ページ
     public function blogArticle($slug){
         $posts = Post::where('slug', $slug)->first();
-        $data = array('Article' => $posts);
+
+        $prev = Post::where('id', '<', $posts->id)->orderBy('id', 'desc')->limit('1')->first();
+        $next = Post::where('id', '>', $posts->id)->orderBy('id')->limit('1')->first();
+        
+        // 全部取る
+        $taxonomy = $posts->taxonomies;
+        
+        // tagとcategoryに分ける
+        $tags = array();
+        $categories = array();
+        foreach($taxonomy as $type){
+            if($type->type === "tag"){
+                array_push($tags,$type);
+            }elseif($type->type === "category"){
+                array_push($categories,$type);
+            }
+        }
+
+        $data = array('article' => $posts, 'prev' => $prev, 'next' => $next, 'tags' => $tags, 'categories' => $categories);
         return view('blogArticle', $data);
     }
     
