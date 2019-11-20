@@ -43,7 +43,7 @@
                         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/blogList">記事一覧</a>
+                        <a class="nav-link" href="/blogList">記事一覧と編集</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="blogAdd">記事追加</a>
