@@ -23,7 +23,22 @@
     <div>
         <a href="changePasswordForm">パスワード変更</a>
     </div>
+    <div>
+        <a href="blogList">記事一覧と編集</a>
+    </div>
+    <div>
+        <a href="blogAdd">記事追加</a>
+    </div>
+    <div>
+        <a href="categoryList">カテゴリ一覧</a>
+    </div>
+    <div>
+        <a href="categoryAddForm">カテゴリ追加</a>
+    </div>
     <footer>
+        <div>
+            <a href="/">ブログへ</a>
+        </div>
     </footer>
 </body>
 </html>
