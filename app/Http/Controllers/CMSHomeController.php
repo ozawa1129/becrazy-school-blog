@@ -39,6 +39,9 @@ class CMSHomeController extends RegisterController {
     public function changePass(Request $request){
         $user_id = Auth::id();
         $user = User::find($user_id);
+        if($request->afterPass != $request->afterPass_check){
+            return redirect('/changePasswordForm')->with('flash_message', '新しいパスワードが一致しません');
+        }
         if(Hash::check($request->nowPass, $user->password)){
             $user->password = bcrypt($request->afterPass);
             $user->save();
