@@ -1,8 +1,8 @@
 @extends('layouts.manager.managerMaster')
 
-@section('title', '記事一覧')
+@section('title', '記事一覧と編集')
 
-@section('h1', '記事一覧')
+@section('h1', '記事一覧と編集')
 
 @section('manager')
     <div class="lists">
