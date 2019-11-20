@@ -46,10 +46,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/blogTop">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Category</a>
+                        <a class="nav-link" href="/categoryChoice">Category</a>
                     </li>
                 </ul>
             </div>
@@ -71,6 +71,22 @@
                         </div>
                         <div class="self_intro col-md-12 text-center">
                             1993年11月29日。becrazyスクール生。よろしくお願い致します！
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="side_category bg-light col-md-12">
+                        <div class="list_category col-md-12">
+                            @php
+                                use App\Models\Taxonomy;
+                                $categories = Taxonomy::whereIn('type', ["category"])->get();
+                                $data = array('categories' => $categories);
+                            @endphp
+                            @foreach ($categories as $category)
+                                <ul class="col-md-12">
+                                    <li class="col-md-12 text-center"><a href="/categoryGroup/{{$category->id}}">■{{ $category->name }}</a></li>
+                                </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>
