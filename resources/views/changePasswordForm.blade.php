@@ -25,19 +25,19 @@
             <dl>
                 <dt>現在のパスワード</dt>
                 <dd>
-                    <input type="text" name="nowPass" autocomplete="off" required>
+                    <input type="password" name="nowPass" autocomplete="off" required>
                 </dd>
             </dl>
             <dl>
                 <dt>新しいパスワード</dt>
                 <dd>
-                    <input type="text" name="afterPass" autocomplete="off" required>
+                    <input type="password" name="afterPass" autocomplete="off" required>
                 </dd>
             </dl>
             <dl>
                 <dt>新しいパスワードの確認</dt>
                 <dd>
-                    <input type="text" name="afterPass_check" autocomplete="off" required>
+                    <input type="password" name="afterPass_check" autocomplete="off" required>
                 </dd>
             </dl>
             <input type="submit" value="パスワードを変更する">
