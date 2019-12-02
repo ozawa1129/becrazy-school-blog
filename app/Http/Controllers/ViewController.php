@@ -17,7 +17,7 @@ class ViewController extends Controller {
     
     // トップページ表示
     public function blogTop(){
-        $posts = Post::orderBy('id', 'DESC')->take(5)->get();
+        $posts = Post::where('status', 'publish')->orderBy('id', 'DESC')->take(5)->get();
         $data = array('latestFive' => $posts);
         return view('blogTop', $data);
     }
@@ -25,26 +25,30 @@ class ViewController extends Controller {
     // 記事ページ
     public function blogArticle($slug){
         $posts = Post::where('slug', $slug)->first();
-
-        $prev = Post::where('id', '<', $posts->id)->orderBy('id', 'desc')->limit('1')->first();
-        $next = Post::where('id', '>', $posts->id)->orderBy('id')->limit('1')->first();
+        if($posts->status === 'publish'){
+            $prev = Post::where('id', '<', $posts->id)->orderBy('id', 'desc')->limit('1')->first();
+            $next = Post::where('id', '>', $posts->id)->orderBy('id')->limit('1')->first();
         
-        // 全部取る
-        $taxonomy = $posts->taxonomies;
+            // 全部取る
+            $taxonomy = $posts->taxonomies;
         
-        // tagとcategoryに分ける
-        $tags = array();
-        $categories = array();
-        foreach($taxonomy as $type){
-            if($type->type === "tag"){
-                array_push($tags,$type);
-            }elseif($type->type === "category"){
-                array_push($categories,$type);
+            // tagとcategoryに分ける
+            $tags = array();
+            $categories = array();
+            foreach($taxonomy as $type){
+                if($type->type === "tag"){
+                    array_push($tags,$type);
+                }elseif($type->type === "category"){
+                    array_push($categories,$type);
+                }
             }
+
+            $data = array('article' => $posts, 'prev' => $prev, 'next' => $next, 'tags' => $tags, 'categories' => $categories);
+            return view('blogArticle', $data);
+        }else{
+            
         }
 
-        $data = array('article' => $posts, 'prev' => $prev, 'next' => $next, 'tags' => $tags, 'categories' => $categories);
-        return view('blogArticle', $data);
     }
     
     // カテゴリー選択時の記事一覧

@@ -108,6 +108,10 @@ header h1{
     display: inline;
 }
 
+.tag_area{
+    margin-bottom: 30px;
+}
+
 /* フッター */
 
 footer{

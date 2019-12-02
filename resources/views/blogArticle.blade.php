@@ -18,27 +18,31 @@
                 <article>{{$article->content}}</article>
             </div>
         </div>
-        <div class="row bg-light category_area">
-            <div class="category_type col-md-12">
+        @if($categories)
+            <div class="row bg-light category_area">
+                <div class="category_type col-md-12">
                     <ul>
                         <li>▶︎関連カテゴリー:</li>
                         @foreach($categories as $category)
                             <li><a href="/categoryGroup/{{$category->id}}">{{$category->name}}</a></li>
                         @endforeach
                     </ul>
+                </div>
             </div>
-        </div>
-        <div class="row bg-light tag_area">
-            <div class="tag_type col-md-12">
+        @endif
+        @if($tags)
+            <div class="row bg-light tag_area">
+                <div class="tag_type col-md-12">
                     <ul>
                         <li>▶︎関連タグ:</li>
                         @foreach($tags as $tag)
                             <li><a href="#">{{$tag->name}}</a></li>
                         @endforeach
                     </ul>
+                </div>
             </div>
-        </div>
-        <div class="row bg-light prev_next">
+        @endif
+        <div class="row prev_next">
             <div class="col-md-6">
                 @if(isset($prev))
                     <div>
