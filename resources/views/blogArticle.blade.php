@@ -10,16 +10,18 @@
 
 @section('content')
     <div class="col-md-9 content">
-        <div class="row bg-light justify-content-center article">
-            <div class="col-md-12 title">
+        <div class="row justify-content-center article">
+            <div class="col-md-12">
                 <h1>{{$article->title}}</h1>
             </div>
+        </div>
+        <div class="row justify-content-center article">
             <div class="col-md-12 words pd_words">
                 <article>{{$article->content}}</article>
             </div>
         </div>
         @if($categories)
-            <div class="row bg-light category_area">
+            <div class="row category_area">
                 <div class="category_type col-md-12">
                     <ul>
                         <li>▶︎関連カテゴリー:</li>
@@ -31,7 +33,7 @@
             </div>
         @endif
         @if($tags)
-            <div class="row bg-light tag_area">
+            <div class="row tag_area">
                 <div class="tag_type col-md-12">
                     <ul>
                         <li>▶︎関連タグ:</li>

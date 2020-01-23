@@ -6,12 +6,15 @@
 
 @section('content')
     <div class="col-md-9 content">
-        <div class="row bg-light justify-content-center article">
+        <div class="row">
+            <h1>【カテゴリーの記事一覧です】</h1>
+        </div>
+        <div class="row justify-content-center article">
             <div class="col-md-12">
                 @foreach ($posts as $post)
                     <ul>
                         <li>
-                            <a href="/blogArticle/{{$post->slug}}">{{$post->title}}</a>
+                            <a href="/blogArticle/{{$post->slug}}">・{{$post->title}}</a>
                         </li>
                     </ul>
                 @endforeach

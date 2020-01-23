@@ -7,7 +7,10 @@
 
 @section('content')
     <div class="col-md-9 content">
-        <div class="row bg-light justify-content-center article">
+        <div class="row">
+            <h1>【カテゴリー一覧です】</h1>
+        </div>
+        <div class="row justify-content-center article">
             <div class="category col-md-12">
                 @foreach ($categories as $category)
                     <ul>

@@ -17,20 +17,21 @@
     <!-- 外部JS -->
     <script type="text/javascript" src="js/library.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://kit.fontawesome.com/27ace18228.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- ヘッダー部分 -->
     <header>
-        <!-- ロゴを表示する部分 -->
-        <div class="container-fluid">
+        <!-- タイトルを表示する部分 -->
+        <div class="container-fluid main_title">
             <div class="row">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-xs-3">
-                            <h1>ブログタイトル(仮)</h1>
+                            <h1>MyBlog</h1>
                         </div>
                         <div class="col-md-8 col-xs-3">
-                            <p>becrazyの最終課題</p>
+                            <p>-- 今後も更新！ --</p>
                         </div>
                     </div>
                 </div>
@@ -38,7 +39,7 @@
         </div>
         <!-- ナビゲーション部分 -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/blogTop">LOGO</a>
+            <a class="navbar-brand" href="/"><i class="fas fa-book"></i></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -46,10 +47,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/categoryChoice">Category</a>
+                        <a class="nav-link" href="/categoryChoice">カテゴリー</a>
                     </li>
                 </ul>
             </div>
@@ -62,20 +63,24 @@
             <!-- サイドバー -->
             <div class="col-md-3">
                 <div class="row">
-                    <div class="prof bg-light">
-                        <div class="prof_img col-md-12 text-center">
-                            画像
-                        </div>
-                        <div class="prof_name col-md-12 text-center">
-                            名前:オザワ
-                        </div>
-                        <div class="self_intro col-md-12 text-center">
-                            1993年11月29日。becrazyスクール生。よろしくお願い致します！
-                        </div>
+                    <div class="side_title col-md-12 text-center">
+                        自己紹介
+                    </div>
+                    <div class="prof_img col-md-12 text-center">
+                        画像
+                    </div>
+                    <div class="prof_name col-md-12 text-center">
+                        名前:オザワ
+                    </div>
+                    <div class="self_intro col-md-12 text-center">
+                        1993年11月29日。becrazyスクール生。よろしくお願い致します！
                     </div>
                 </div>
                 <div class="row">
-                    <div class="side_category bg-light col-md-12">
+                    <div class="side_title col-md-12 text-center">
+                        最新記事
+                    </div>
+                    <div class="side_category col-md-12">
                         <div class="list_category col-md-12">
                             @php
                                 use App\Models\Taxonomy;

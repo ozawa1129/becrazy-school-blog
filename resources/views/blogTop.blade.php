@@ -5,7 +5,7 @@
 @section('content')
     <div class="col-md-9 content">
         @foreach($latestFive as $list)
-            <div class="row bg-light justify-content-center article">
+            <div class="row justify-content-center article border-top border-bottom">
                 <div class="col-md-10 title">
                    <h1 class="text-center"><a href="blogArticle/{{$list->slug}}">{{ $list->title }}</a></h1>
                 </div>
