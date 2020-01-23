@@ -27,6 +27,8 @@ class SoftdeleteAddTable extends Migration
     public function down()
     {
         //ロールバック用
-        Schema::dropIfExists('taxonomy');
+        Schema::table('taxonomy', function (Blueprint $table) {
+            $table->dropColumn('deleted_at');
+        });
     }
 }
