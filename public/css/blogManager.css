@@ -40,13 +40,20 @@ header h1{
     margin-top: 25px;
 }
 
-/* ロゴ */
-.logo{
+/* タイトル */
+.main_title{
+    padding-top: 20px;
+    padding-bottom: 23px;
 }
 
 /* ナビゲーション */
 
 /* サイドバー */
+.side_title{
+    padding: 10px 0;
+    background-color: crimson;
+    color: aliceblue;
+}
 .prof_img{
     padding-top: 40px;
 }
@@ -60,11 +67,11 @@ header h1{
 }
 
 .side_category{
-    margin-top: 30px;
+    margin-top: 0px;
 }
 
 .list_category{
-    padding: 50px 0px;
+    padding: 10px 0px;
 }
 
 /* コンテンツ */
@@ -80,7 +87,7 @@ header h1{
 }
 
 .words{
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 .pd_words{
@@ -98,6 +105,11 @@ header h1{
 
 .category {
     padding-top: 50px;
+}
+
+.category_type{
+    margin-left: -38px;
+    padding-bottom: 200px;
 }
 
 .category_type ul li{
