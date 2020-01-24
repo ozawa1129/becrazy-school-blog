@@ -225,6 +225,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //　自作の関数をbladeで使う
+        'My_func' => App\Lib\My_func::class,
 
     ],
 
