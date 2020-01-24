@@ -10,7 +10,7 @@ use App\Models\TaxonomyRelationship;
 use Auth;
 
 class BlogController extends Controller {
-    
+
     /**
      * コンストラクタ
      * 他のメソッドを実行する前に認証済みかどうかチェックする
@@ -19,43 +19,47 @@ class BlogController extends Controller {
         // 認証ミドルウエアを利用する設定
         $this->middleware('auth');
     }
-    
-    // mine_typeの定数化
-    const MIME_TYPE_TEXT = "text/html";
-    
+
     /*
     -------------------------
     ブログの管理機能で使うメソッド
     -------------------------
     */
-    
+
     // 記事一覧表示
-    public function blogList(){
+    public function articleList(){
         $posts = Post::all();
         $data = array('blogList' => $posts);
         return view('blogList', $data);
     }
-    
+
     // 記事追加フォーム
-    public function blogAddForm(){
+    public function articleAddForm(){
         $user_id = Auth::id();
         $tags = Taxonomy::whereIn('type', ["tag"])->get();
         $categories = Taxonomy::whereIn('type', ["category"])->get();
         $data = array('user_id' => $user_id, 'tags' => $tags, 'categories' => $categories);
         return view('blogAddForm', $data);
     }
-    
+
     // 記事追加ポスト
-    public function blogAdd(Request $request){
+    public function postArticle(Request $request){
         $posts = new Post();
         $posts->user_id = $request->user_id;
         $posts->title = $request->title;
         $posts->content = $request->content;
-        $posts->slug = $request->slug;
+        if(isset($request->imagefile)){
+            $path = $request->imagefile->store('/public');
+            $image_url = str_replace('public', 'storage', $path);
+            $posts->slug = $image_url;
+        }else{
+            $posts->slug = $request->slug;
+        }
         $posts->status = $request->status;
-        $posts->mime_type = self::MIME_TYPE_TEXT;
+        $posts->type = $request->type;
+        $posts->mime_type = "text/html";
         $posts->save();
-        
+
         if(isset($request->tag)){
             foreach ($request->tags as $tag){
                 $taxonomyRelationships = TaxonomyRelationship::select('taxonomy_order')
@@ -70,7 +74,7 @@ class BlogController extends Controller {
                 }
             }
         }
-        
+
         if(isset($request->categories)){
             foreach ($request->categories as $category){
                 $taxonomyRelationships = TaxonomyRelationship::select('taxonomy_order')
@@ -86,25 +90,53 @@ class BlogController extends Controller {
             }
         }
 
-        return redirect('blogAdd');
+        return redirect('/articleAddForm');
+    }
+
+    // 画像追加フォーム
+    public function imageAddForm(){
+        $user_id = Auth::id();
+        $data = array('user_id' => $user_id);
+        return view('imageAddForm', $data);
+    }
+
+    // 画像追加ポスト
+    public function postImage(Request $request){
+        $posts = new Post();
+        $posts->user_id = $request->user_id;
+        $posts->title = $request->title;
+        $posts->content = $request->content;
+        if(isset($request->imagefile)){
+            $path = $request->imagefile->store('/public');
+            $image_url = str_replace('public', 'storage', $path);
+            $posts->slug = $image_url;
+        }else{
+            $posts->slug = $request->slug;
+        }
+        $posts->status = 'inherit';
+        $posts->type = 'attachment';
+        $posts->mime_type = 'image/jpeg';
+        $posts->save();
+
+        return redirect('imageAddForm');
     }
 
     // 記事編集フォーム
-    public function blogEditForm($id){
+    public function articleEditForm($id){
         $user_id = Auth::id();
         $posts = Post::find($id);
         $data = array('blogEdit' => $posts ,'user_id' => $user_id);
         return view('blogEditForm', $data);
     }
-    
+
     // 記事編集ポスト
-    public function blogEdit(Request $request){
+    public function articleEdit(Request $request){
         // バリデーション後ほど細かく記載
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string'
         ]);
-        
+
         $posts = Post::find($request->id);
         $posts->user_id = $request->user_id;
         $posts->title = $request->title;
@@ -115,13 +147,13 @@ class BlogController extends Controller {
         $posts->save();
         return redirect('blogList');
     }
-    
+
     // 記事論理削除ポスト
-    public function blogHide(Request $request){
+    public function articleHide(Request $request){
             $validatedData = $request->validate([
             'ids' => 'array|required'
         ]);
-        
+
         // 完了メソッド
         $softDeleted = Post::whereIn('id', $request->ids)->get();
         foreach($softDeleted as $delete){
@@ -130,21 +162,26 @@ class BlogController extends Controller {
         }
         return redirect('blogList');
     }
-    
-    // カテゴリー一覧
-    public function categoryList(){
-        $taxonomy = Taxonomy::all();
-        $data = array('taxonomy' => $taxonomy);
-        return view('categoryList', $data);
+
+    // カテゴリーのページ
+    public function categoryPage(){
+        $category = Taxonomy::select('id','name','description')->where('type', 'category')->get();
+        return view('categoryPage', ['category' => $category]);
     }
-    
-    // カテゴリー追加フォーム
-    public function categoryAddForm(){
+
+    //　タグのページ
+    public function tagPage(){
+        $tag = Taxonomy::select('id','name','description')->where('type', 'tag')->get();
+        return view('tagPage', ['tag' => $tag]);
+    }
+
+    // カテゴリー、タグの追加フォーム
+    public function taxonomyAddForm(){
         return view('categoryAddForm');
     }
-    
+
     // カテゴリー追加ポスト
-    public function categoryAdd(Request $request){
+    public function taxonomyAdd(Request $request){
         // 後々バリデーション
         $taxonomy = new Taxonomy();
         $taxonomy->type = $request->type;
@@ -152,83 +189,37 @@ class BlogController extends Controller {
         $taxonomy->slug = $request->slug;
         $taxonomy->description = $request->description;
         $taxonomy->save();
-        return redirect('categoryAddForm');
+        return redirect('taxonomyAddForm');
     }
-    
+
     // カテゴリー編集フォーム
-    public function categoryEditForm($id){
+    public function taxonomyEditForm($id){
         $taxonomy = Taxonomy::find($id);
         $data = array('categoryEdit' => $taxonomy);
         return view('categoryEditForm', $data);
     }
-    
+
     // カテゴリー編集ポスト
-    public function categoryEdit(Request $request){
+    public function taxonomyEdit(Request $request){
         $taxonomy = Taxonomy::find($request->id);
         $taxonomy->name = $request->name;
-        $taxonomy->type = $request->type;
+        $taxonomy->description = $request->description;
         $taxonomy->save();
-        return redirect('categoryList');
+        return redirect('categoryPage');
     }
-    
-    /*
-    --------------------
-    認証機能用で使うメソッド
-    --------------------
-    */
-    
-    // 初期ユーザー登録フォーム
-    public function userAddForm(){
-        
-    }
-    
-    // 初期ユーザー登録ポスト
-    public function userAdd(){
-        
-    }
-    
-    // 管理ユーザー一覧
-    public function managerList(){
-        
-    }
-    
-    // 管理ユーザー登録フォーム
-    public function managerAddForm(){
-        
-    }
-    
-    // 管理ユーザー登録ポスト
-    public function managerAdd(Request $request){
-        
-    }
-    
-    // ログインユーザーのパスワード変更フォーム
-    public function passChangeForm(){
-        
-    }
-    
-    // ログインユーザーパスワード変更のポスト
-    public function passChange(){
-        
-    }
-    
-    // ログインフォーム
-    public function loginForm(){
-        
-    }
-    
-    // ログインポスト
-    public function login(Request $request){
-        
-    }
-    
-    // ログアウトフォーム
-    public function logoutForm(){
-        
-    }
-    
-    // ログアウトポスト
-    public function logout(Request $request){
-        
+
+    //　カテゴリー、タグの論理削除
+    public function categorySoftDelete(Request $request){
+        $validatedData = $request->validate([
+            'ids' => 'array|required'
+        ]);
+
+        // 完了メソッド
+        $softDeleted = Taxonomy::whereIn('id', $request->ids)->get();
+        foreach($softDeleted as $delete){
+            $delete->deleted_at = now();
+            $delete->save();
+        }
+        return redirect('home');
     }
 }

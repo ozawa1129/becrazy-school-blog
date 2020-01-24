@@ -6,16 +6,9 @@
 
 @section('manager')
     <div class="add">
-        <form method="POST" action="blogAdd">
+        <form method="POST" action="postArticle">
             @csrf
             <input type="hidden" name="user_id" value="{{$user_id}}">
-            <dl>
-                <dt>タイプ</dt>
-                <dd>
-                    <input type="radio" name="mine_type" required value="text/html">記事
-                    <input type="radio" name="mine_type" required value="image/png">メディア
-                </dd>
-            </dl>
             <dl>
                 <dt>タイトル</dt>
                 <dd><input type="text" name="title" required value="{{ old('title') }}"></dd>
@@ -27,14 +20,6 @@
             <dl>
                 <dt>スラッグ</dt>
                 <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>
-            </dl>
-            <dl>
-                <dt>ステータス</dt>
-                <dd>
-                    <input type="radio" name="status" required value="publish">公開
-                    <input type="radio" name="status" required value="draft">下書き
-                    <input type="radio" name="status" required value="inherit">メディアアップロード
-                </dd>
             </dl>
             <dl>
                 <dt>タグ</dt>
@@ -52,7 +37,22 @@
                     @endforeach
                 </dd>
             </dl>
-            <input type="submit" value="ブログ投稿">
+            <dl>
+                <dt>タイプ</dt>
+                <dd>
+                    <input type="radio" name="type" value="article">記事
+                    <input type="radio" name="type" value="page">固定ページ
+                </dd>
+            </dl>
+            <dl>
+                <dt>ステータス</dt>
+                <dd>
+                    <input type="radio" name="status" required value="publish">公開
+                    <input type="radio" name="status" required value="draft">下書き
+                    <input type="radio" name="status" required value="inherit">メディアアップロード
+                </dd>
+            </dl>
+            <input type="submit" value="コンテンツ投稿">
         </form>
     </div>
 @endsection

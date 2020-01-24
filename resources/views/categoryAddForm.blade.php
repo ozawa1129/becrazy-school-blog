@@ -1,12 +1,12 @@
 @extends('layouts.manager.managerMaster')
 
-@section('title', 'カテゴリー追加')
+@section('title', 'カテゴリー、タグの追加')
 
-@section('h1', 'カテゴリー追加')
+@section('h1', 'カテゴリー、タグの追加')
 
 @section('manager')
     <div class="add">
-        <form method="POST" action="categoryAdd">
+        <form method="POST" action="taxonomyAdd">
             @csrf
             <dl>
                 <dt>タイプ</dt>
@@ -25,7 +25,7 @@
             </dl>
             <dl>
                 <dt>説明文</dt>
-                <dd><textarea name="description" required>{{ old('content')}}</textarea></dd>
+                <dd><textarea name="description" required>{{ old('content') }}</textarea></dd>
             </dl>
             <input type="submit" value="追加">
         </form>

@@ -15,7 +15,7 @@
             </ul>
         </div>
         @endif
-        <form method="POST" action="../categoryEdit">
+        <form method="POST" action="../taxonomyEdit">
             @csrf
             <input type="hidden" name="id" required value="{{ $categoryEdit->id }}">
             <dl>
@@ -27,13 +27,14 @@
                 <dd><input type="text" name="slug" required value="{{ $categoryEdit->slug }}"></dd>
             </dl>
             <dl>
-                <dt>タイプ</dt>
-                <dd><input type="text" name="type" required value="{{ $categoryEdit->type }}"></dd>
+                <dt>説明文</dt>
+                <dd><textarea type="text" name="description" required value="{{ $categoryEdit->description }}">{{ $categoryEdit->description }}</textarea></dd>
             </dl>
             <input type="submit" value="更新">
         </form>
         <div class="back">
-            <a href="../categoryList"><input type="submit" value="カテゴリーの一覧に戻る"></a>
+            <a href="../categoryPage"><input type="submit" value="カテゴリーのページに戻る"></a>
+            <a href="../tagPage"><input type="submit" value="タグのページに戻る"></a>
         </div>
     </div>
 @endsection

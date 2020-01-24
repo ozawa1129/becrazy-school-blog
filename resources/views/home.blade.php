@@ -27,13 +27,19 @@
         <a href="blogList">記事一覧と編集</a>
     </div>
     <div>
-        <a href="blogAdd">記事追加</a>
+        <a href="articleAddForm">記事追加</a>
     </div>
     <div>
-        <a href="categoryList">カテゴリ一覧</a>
+        <a href="imageAddForm">画像追加</a>
     </div>
     <div>
-        <a href="categoryAddForm">カテゴリ追加</a>
+        <a href="categoryPage">カテゴリページ</a>
+    </div>
+    <div>
+        <a href="tagPage">タグページ</a>
+        </div>
+    <div>
+        <a href="categoryAddForm">カテゴリー、タグの追加</a>
     </div>
     <footer>
         <div>
