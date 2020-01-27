@@ -66,7 +66,7 @@ Route::get('blogArticle/{slug}' ,'ViewController@blogArticle');
 Route::get('categoryChoice' ,'ViewController@categoryChoice');
 
 // カテゴリー選択時に飛ばすポスト
-Route::get('categoryGroup/{id}' ,'ViewController@categoryGroup');
+Route::get('categoryGroup/{slug}' ,'ViewController@categoryGroup');
 
 /*
 ------------------------
