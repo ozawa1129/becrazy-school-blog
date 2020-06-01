@@ -24,7 +24,7 @@
         <a href="changePasswordForm">パスワード変更</a>
     </div>
     <div>
-        <a href="blogList">記事一覧と編集</a>
+        <a href="articleList">記事一覧と編集</a>
     </div>
     <div>
         <a href="articleAddForm">記事追加</a>

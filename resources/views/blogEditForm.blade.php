@@ -15,10 +15,11 @@
             </ul>
         </div>
         @endif
-        <form method="POST" action="../blogEdit" enctype="text/html">
+        <form method="POST" action="../articleEdit" enctype="text/html">
             @csrf
             <input type="hidden" name="id" required value="{{ $blogEdit->id }}">
             <input type="hidden" name="user_id" value="{{$user_id}}">
+            <input type="hidden" name="mime_type" required value="{{ $blogEdit->mime_type }}">
             <dl>
                 <dt>タイトル</dt>
                 <dd><input type="text" name="title" required value="{{ $blogEdit->title }}"></dd>
@@ -42,7 +43,7 @@
             <input type="submit" value="更新">
         </form>
         <div class="back">
-            <a href="../blogList"><input type="submit" value="ブログ一覧に戻る"></a>
+            <a href="../articleList"><input type="submit" value="ブログ一覧に戻る"></a>
         </div>
     </div>
 @endsection

@@ -1,0 +1,38 @@
+.square{
+    background-color: #1fc3cd;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  }
+
+/* 輪郭を描くアニメーション */
+  .path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 5s linear alternate infinite;
+  }
+
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 822;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .title {
+    font-weight: 900;
+    font-size: 3.5em;
+  }
+
+  .title .char-animation {
+    display: inline-block;
+    line-height: 1em;
+  }
+
+  .skew{
+      display: inline-block;
+      font-size: 48px;
+      transform: skewX(-100deg);
+  }

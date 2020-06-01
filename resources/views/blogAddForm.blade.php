@@ -14,9 +14,17 @@
                 <dd><input type="text" name="title" required value="{{ old('title') }}"></dd>
             </dl>
             <dl>
+                <dt>サムネイル</dt>
+                    <dd><input type="text" name="thumbnail" value="{{ old('thumbnail') }}"></dd>
+                </dl>
+            <dl>
                 <dt>本文</dt>
                 <dd><textarea name="content" required>{{ old('content')}}</textarea></dd>
             </dl>
+            <dl>
+                <dt>概要</dt>
+                    <dd><textarea name="summary" required>{{ old('summary')}}</textarea></dd>
+                </dl>
             <dl>
                 <dt>スラッグ</dt>
                 <dd><input type="text" name="slug" required value="{{ old('slug') }}"></dd>

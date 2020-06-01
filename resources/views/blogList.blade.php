@@ -19,7 +19,7 @@
                         <tr>
                             <td><input type="checkbox" name="ids[]" value="{{ $list->id }}"></td>
                             <td>{{ $list->id }}</td>
-                            <td><a href="blogEdit/{{$list->id}}">{{ $list->title }}</a></td>
+                            <td><a href="articleEdit/{{$list->id}}">{{ $list->title }}</a></td>
                         </tr>
                     @endforeach
                 </tbody>

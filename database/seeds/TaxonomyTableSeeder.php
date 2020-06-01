@@ -9,8 +9,7 @@ class TaxonomyTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+
     /**
      * Run the database seeds.
      * カテゴリー用Seeder
@@ -24,57 +23,59 @@ class TaxonomyTableSeeder extends Seeder
 
         // シードデータの配列
         $seed_data = [
-            // ユーザー名: test-user
-            // メールアドレス: test-user@example.com
-            // パスワード: password
+            // id: 主キー
+            // type: categoryにする
+            // name: カテゴリーの名前
+            // slug: categoryGroup/$slug
+            // description: 説明文
             [
                 'id' => '1',
                 'type' => 'category',
-                'name' => 'html',
-                'slug' => 'html',
-                'description' => 'htmlカテゴリー',
+                'name' => 'HTML',
+                'slug' => 'HTML',
+                'description' => 'HTMLカテゴリー',
             ],
             [
-                'id' => '1',
+                'id' => '2',
                 'type' => 'category',
-                'name' => 'css',
-                'slug' => 'css',
-                'description' => 'cssカテゴリー',
+                'name' => 'CSS',
+                'slug' => 'CSS',
+                'description' => 'CSSカテゴリー',
             ],
             [
-                'id' => '1',
+                'id' => '3',
                 'type' => 'category',
-                'name' => 'javascript',
-                'slug' => 'javascript',
-                'description' => 'javascriptカテゴリー',
+                'name' => 'JavaScript',
+                'slug' => 'JavaScript',
+                'description' => 'JavaScriptカテゴリー',
             ],
             [
-                'id' => '1',
+                'id' => '4',
                 'type' => 'category',
-                'name' => 'php',
-                'slug' => 'php',
-                'description' => 'phpカテゴリー',
+                'name' => 'PHP',
+                'slug' => 'PHP',
+                'description' => 'PHPカテゴリー',
             ],
             [
-                'id' => '1',
+                'id' => '5',
                 'type' => 'category',
                 'name' => 'Game',
-                'slug' => 'game',
-                'description' => 'gameカテゴリー',
+                'slug' => 'Game',
+                'description' => 'Gameカテゴリー',
             ],
             [
-                'id' => '1',
+                'id' => '6',
                 'type' => 'category',
                 'name' => 'Culture',
-                'slug' => 'culture',
-                'description' => 'cultureカテゴリー',
+                'slug' => 'Culture',
+                'description' => 'Cultureカテゴリー',
             ],
             [
-                'id' => '1',
+                'id' => '7',
                 'type' => 'category',
-                'name' => 'life',
-                'slug' => 'life',
-                'description' => 'lifeカテゴリー',
+                'name' => 'Life',
+                'slug' => 'Life',
+                'description' => 'Lifeカテゴリー',
             ],
         ];
 

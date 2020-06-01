@@ -22,8 +22,8 @@ class ViewController extends Controller {
 
     // トップページ表示
     public function blogTop(){
-        $posts = Post::where('status', 'publish')->orderBy('id', 'DESC')->take(5)->get();
-        $data = array('latestFive' => $posts);
+        $posts = Post::where('status', 'publish')->orderBy('id', 'DESC')->take(9)->get();
+        $data = array('latest' => $posts);
         return view('blogTop', $data);
     }
 
@@ -31,8 +31,8 @@ class ViewController extends Controller {
     public function blogArticle($slug){
         $posts = Post::where('slug', $slug)->first();
         if($posts->status === 'publish'){
-            $prev = Post::where('id', '<', $posts->id)->orderBy('id', 'desc')->limit('1')->first();
-            $next = Post::where('id', '>', $posts->id)->orderBy('id')->limit('1')->first();
+            $prev = Post::where([['id', '<', $posts->id], ['status', '=', 'publish'], ['mime_type', '=', 'text/html']])->orderBy('id', 'desc')->limit('1')->first();
+            $next = Post::where([['id', '>', $posts->id], ['status', '=', 'publish'], ['mime_type', '=', 'text/html']])->orderBy('id')->limit('1')->first();
 
             // 全部取る
             $taxonomy = $posts->taxonomies;
@@ -64,9 +64,14 @@ class ViewController extends Controller {
     }
 
     // カテゴリー選択時に飛ばす
-    public function categoryGroup($id){
-        $taxonomies = Taxonomy::find($id);
-        $data = array('posts' => $taxonomies->posts);
-        return view('categoryGroup', $data);
+    public function categoryGroup($slug){
+        $taxonomy = Taxonomy::where('slug',$slug)->first();
+        if(isset($taxonomy->posts)){
+            $data = array('posts' => $taxonomy->posts, 'category' => $taxonomy);
+            return view('categoryGroup', $data);
+        }else{
+            $data = array('category' => $taxonomy);
+            return view('categoryGroup', $data);
+        }
     }
 }

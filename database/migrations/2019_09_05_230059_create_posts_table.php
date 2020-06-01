@@ -33,8 +33,14 @@ class CreatePostsTable extends Migration
             // アップロードメディアの場合ファイル名を保存
             $table->string('title')->nullable(false);
 
+            // サムネイル　パスを格納する nullを許可
+            $table->string('thumbnail')->nullable();
+
             // 本文 nullを許可
             $table->longText('content')->nullable();
+
+            // 概要 nullを許可
+            $table->string('summary')->nullable();
 
             // 投稿状態 nullを許可しない
             // publish: 公開済み

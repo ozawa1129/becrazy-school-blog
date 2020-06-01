@@ -28,4 +28,15 @@
             <input type="submit" value="画像をアップロード">
         </form>
     </div>
+    <div class="images">
+        <ul>
+            @if(isset($images))
+                @foreach($images as $image)
+                    <li><img src="/{{$image->slug}}" class="image_fluid" width="150px"></li>
+                    <li>/{{$image->slug}}</li>
+                    <button class="copy_clipboard">クリップボードにコピー</button>
+                @endforeach
+            @endif
+        </ul>
+    </div>
 @endsection

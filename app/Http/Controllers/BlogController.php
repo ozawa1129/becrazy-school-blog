@@ -47,7 +47,9 @@ class BlogController extends Controller {
         $posts = new Post();
         $posts->user_id = $request->user_id;
         $posts->title = $request->title;
+        $posts->thumbnail = $request->thumbnail;
         $posts->content = $request->content;
+        $posts->summary = $request->summary;
         if(isset($request->imagefile)){
             $path = $request->imagefile->store('/public');
             $image_url = str_replace('public', 'storage', $path);
@@ -96,7 +98,8 @@ class BlogController extends Controller {
     // 画像追加フォーム
     public function imageAddForm(){
         $user_id = Auth::id();
-        $data = array('user_id' => $user_id);
+        $images = Post::where('status', '=', 'inherit')->get();
+        $data = array('user_id' => $user_id, 'images' => $images);
         return view('imageAddForm', $data);
     }
 
@@ -143,9 +146,9 @@ class BlogController extends Controller {
         $posts->content = $request->content;
         $posts->slug = $request->slug;
         $posts->status = $request->status;
-        $posts->mime_type = self::MIME_TYPE_TEXT;
+        $posts->mime_type = $request->mime_type;
         $posts->save();
-        return redirect('blogList');
+        return redirect('articleList');
     }
 
     // 記事論理削除ポスト

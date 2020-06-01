@@ -4,81 +4,64 @@
     <!-- レスポンシブルデザインのためのメタタグ -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!-- BootstrapCSS本体 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
-    <meta name="keywords" content="検索キーワード">
-    <meta name="description" content="説明文">
+
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="favicon.ico">
     <!-- 外部CSS -->
     <link href="{{ asset('css/blogManager.css') }}" rel="stylesheet" type="text/css">
     <!-- 外部JS -->
-    <script type="text/javascript" src="js/library.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <script src="{{ asset('/js/anime/lib/anime.min.js') }}"></script>
+    <!-- アイコンを設定する -->
     <script src="https://kit.fontawesome.com/27ace18228.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- ヘッダー部分 -->
-    <header>
-        <!-- タイトルを表示する部分 -->
-        <div class="container-fluid main_title">
-            <div class="row">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-xs-3">
-                            <h1>MyBlog</h1>
-                        </div>
-                        <div class="col-md-8 col-xs-3">
-                            <p>-- 今後も更新！ --</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <header class="header_nav">
         <!-- ナビゲーション部分 -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/"><i class="fas fa-book"></i></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/"><i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categoryChoice">カテゴリー</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <div id="menu-box">
+            <div id="toggle"><a href="#">menu</a></div>
+            <ul id="menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/categoryGroup/HTML">HTML</a></li>
+                <li><a href="/categoryGroup/CSS">CSS</a></li>
+                <li><a href="/categoryGroup/JavaScript">JavaScript</a></li>
+                <li><a href="/categoryGroup/PHP">PHP</a></li>
+                <li><a href="/categoryGroup/GAME">Game</a></li>
+                <li><a href="/categoryGroup/CULTURE">Culture</a></li>
+                <li><a href="/categoryGroup/LIFE">Life</a></li>
+            </ul>
+        </div>
     </header>
+    <!-- タイトルを表示する部分 -->
+    @yield('catch_copy')
     <div class="main container">
         <div class="row">
             <!-- メインコンテンツ -->
             @yield('content')
             <!-- サイドバー -->
-            <div class="col-md-3">
-                <div class="row">
+            <div class="col-md-3 side_content">
+                <div class="row bg-light mb-5">
                     <div class="side_title col-md-12 text-center">
                         自己紹介
                     </div>
-                    <div class="prof_img col-md-12 text-center">
-                        画像
-                    </div>
-                    <div class="prof_name col-md-12 text-center">
-                        名前:オザワ
-                    </div>
-                    <div class="self_intro col-md-12 text-center">
-                        1993年11月29日。becrazyスクール生。よろしくお願い致します！
+                    <div class="row">
+                        <div class="prof_img col-md-12 text-center">
+                            <img src="/storage/P6SLw0qgRARgKoHrsRjVbTwj71Ss3vcmaTDuERxl.jpeg" class="img-fluid" alt="黒猫" width="150px">
+                        </div>
+                        <div class="prof_name col-md-12 text-center">
+                            このサイトの制作者：オザワ
+                        </div>
+                        <div class="self_intro col-md-12 text-center">
+                            ゲーム、映画、漫画、プログラミング、猫などが好き
+                        </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row bg-light">
                     <div class="side_title col-md-12 text-center">
-                        最新記事
+                        カテゴリー
                     </div>
                     <div class="side_category col-md-12">
                         <div class="list_category col-md-12">
@@ -89,7 +72,7 @@
                             @endphp
                             @foreach ($categories as $category)
                                 <ul class="col-md-12">
-                                    <li class="col-md-12 text-center"><a href="/categoryGroup/{{$category->id}}">■{{ $category->name }}</a></li>
+                                    <li class="col-md-12 text-center"><a href="/categoryGroup/{{$category->name}}">{{ $category->name }}</a></li>
                                 </ul>
                             @endforeach
                         </div>
@@ -112,8 +95,10 @@
     </footer>
     <!-- オプションとして利用するJavaScript -->
     <!-- jQueryというライブラリが必ず最初, 次にPopper.js, 最後にBootstrap のJavaScriptを読み込むようにする -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Ajaxの関数が使えないためslimから通常盤へ書き換える -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{ asset('/js/main.js') }}"></script>
 </body>
 </html>
