@@ -74,4 +74,19 @@ class ViewController extends Controller {
             return view('categoryGroup', $data);
         }
     }
+
+    // reframingページを表示する
+    public function viewReframing(){
+        return view('reframing');
+    }
+
+    // reframing_post
+    public function reframingPost(Request $request){
+        if(isset($request)){
+            $worries = $request->worries;
+
+            return view('reframing', ['worries' => $worries]);
+        }
+    }
+
 }

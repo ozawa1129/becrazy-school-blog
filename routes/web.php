@@ -7,6 +7,11 @@ Route::get('test' ,'ViewController@testpage');
 // トップページ表示
 Route::get('/' ,'ViewController@blogTop');
 
+// reframingページの表示
+Route::get('reframing', 'ViewController@viewReframing')->name('reframing');
+// reframingする内容をpost
+Route::post('reframingPost', 'ViewController@reframingPost');
+
 /*
 -----------------------------
 ブログの管理機能で使うルーティング
